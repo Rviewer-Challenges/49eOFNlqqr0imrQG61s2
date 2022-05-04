@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		090B3CFE2821AF0A0048EFAC /* MemoryGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3CFD2821AF0A0048EFAC /* MemoryGameApp.swift */; };
-		090B3D002821AF0A0048EFAC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3CFF2821AF0A0048EFAC /* HomeView.swift */; };
+		090B3D002821AF0A0048EFAC /* GameSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3CFF2821AF0A0048EFAC /* GameSettingsView.swift */; };
 		090B3D022821AF0B0048EFAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 090B3D012821AF0B0048EFAC /* Assets.xcassets */; };
 		090B3D052821AF0B0048EFAC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 090B3D042821AF0B0048EFAC /* Preview Assets.xcassets */; };
 		090B3D102821C1110048EFAC /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D0F2821C1110048EFAC /* GameDifficulty.swift */; };
-		090B3D142821C1850048EFAC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D132821C1850048EFAC /* GameView.swift */; };
+		090B3D142821C1850048EFAC /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D132821C1850048EFAC /* MemoryGameView.swift */; };
 		090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D162821C2380048EFAC /* MemoryGame.swift */; };
 		090B3D1B2821C3DC0048EFAC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D1A2821C3DC0048EFAC /* Theme.swift */; };
 /* End PBXBuildFile section */
@@ -20,11 +20,11 @@
 /* Begin PBXFileReference section */
 		090B3CFA2821AF0A0048EFAC /* MemoryGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		090B3CFD2821AF0A0048EFAC /* MemoryGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameApp.swift; sourceTree = "<group>"; };
-		090B3CFF2821AF0A0048EFAC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		090B3CFF2821AF0A0048EFAC /* GameSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsView.swift; sourceTree = "<group>"; };
 		090B3D012821AF0B0048EFAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		090B3D042821AF0B0048EFAC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		090B3D0F2821C1110048EFAC /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
-		090B3D132821C1850048EFAC /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		090B3D132821C1850048EFAC /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		090B3D162821C2380048EFAC /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		090B3D1A2821C3DC0048EFAC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,8 +60,8 @@
 			isa = PBXGroup;
 			children = (
 				090B3CFD2821AF0A0048EFAC /* MemoryGameApp.swift */,
-				090B3CFF2821AF0A0048EFAC /* HomeView.swift */,
-				090B3D132821C1850048EFAC /* GameView.swift */,
+				090B3CFF2821AF0A0048EFAC /* GameSettingsView.swift */,
+				090B3D132821C1850048EFAC /* MemoryGameView.swift */,
 				090B3D162821C2380048EFAC /* MemoryGame.swift */,
 				090B3D1A2821C3DC0048EFAC /* Theme.swift */,
 				090B3D0F2821C1110048EFAC /* GameDifficulty.swift */,
@@ -150,10 +150,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				090B3D002821AF0A0048EFAC /* HomeView.swift in Sources */,
+				090B3D002821AF0A0048EFAC /* GameSettingsView.swift in Sources */,
 				090B3D102821C1110048EFAC /* GameDifficulty.swift in Sources */,
 				090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */,
-				090B3D142821C1850048EFAC /* GameView.swift in Sources */,
+				090B3D142821C1850048EFAC /* MemoryGameView.swift in Sources */,
 				090B3CFE2821AF0A0048EFAC /* MemoryGameApp.swift in Sources */,
 				090B3D1B2821C3DC0048EFAC /* Theme.swift in Sources */,
 			);

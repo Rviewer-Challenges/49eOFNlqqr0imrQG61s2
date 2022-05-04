@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Theme {
+enum Theme: CaseIterable {
     case pokemon, emojis
     
     var title: String {
@@ -17,4 +17,6 @@ enum Theme {
         case .emojis: return "Emojis"
         }
     }
+    
+    static let example = Theme.pokemon
 }
