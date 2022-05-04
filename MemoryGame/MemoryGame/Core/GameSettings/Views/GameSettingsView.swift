@@ -80,15 +80,9 @@ extension GameSettingsView {
     // MARK: - Start Game Button -
     var startGameButton: some View {
         NavigationLink {
-            let game = createGame()
-            MemoryGameView(game: game, theme: theme)
+            MemoryGameView()
         } label: {
             Text("Start game!")
         }
-    }
-    
-    func createGame() -> MemoryGame {
-        let memoryGame = MemoryGame(difficulty: gameDifficulty)
-        return memoryGame
     }
 }

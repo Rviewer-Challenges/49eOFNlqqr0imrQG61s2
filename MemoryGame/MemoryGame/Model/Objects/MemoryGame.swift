@@ -11,9 +11,9 @@ import Foundation
 struct MemoryGame {
     private(set) var cards: [Card]
     private(set) var difficulty: GameDifficulty
-    private(set) var moveCounter: Int
+    private(set) var moveCount: Int
     // Remaining pairs = total cards - matched cards
-    var remainingPairsCounter: Int { cards.count - cards.filter { $0.isMatched }.count }
+    var remainingPairsCount: Int { cards.count - cards.filter { $0.isMatched }.count }
     
     init(difficulty: GameDifficulty) {
         self.cards = []
@@ -26,14 +26,21 @@ struct MemoryGame {
             cards.append(Card(id: i * 2 + 1, content: "\(i)"))
         }
         
-        self.moveCounter = 0
+        self.moveCount = 0
     }
     
-    struct Card {
-        private let id: Int
+    mutating func select(_ card: Card) {
+        guard let selectedIndex = cards.firstIndex(of: card) else { return }
+        cards[selectedIndex].isFaceUp.toggle()
+    }
+    
+    struct Card: Equatable {
+        static func ==(lhs: Card, rhs: Card) -> Bool { lhs.id == rhs.id }
+        
+        let id: Int
         let content: String
-        private(set) var isFaceUp = false
-        private(set) var isMatched = false
+        var isFaceUp = false
+        var isMatched = false
         
         init(id: Int, content: String) {
             self.id = id

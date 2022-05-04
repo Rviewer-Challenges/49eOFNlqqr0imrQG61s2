@@ -15,6 +15,7 @@
 		090B3D142821C1850048EFAC /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D132821C1850048EFAC /* MemoryGameView.swift */; };
 		090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D162821C2380048EFAC /* MemoryGame.swift */; };
 		090B3D1B2821C3DC0048EFAC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D1A2821C3DC0048EFAC /* Theme.swift */; };
+		099EF4492822D870008CBE96 /* MemoryGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		090B3D132821C1850048EFAC /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		090B3D162821C2380048EFAC /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		090B3D1A2821C3DC0048EFAC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +62,8 @@
 			isa = PBXGroup;
 			children = (
 				090B3CFD2821AF0A0048EFAC /* MemoryGameApp.swift */,
-				090B3CFF2821AF0A0048EFAC /* GameSettingsView.swift */,
-				090B3D132821C1850048EFAC /* MemoryGameView.swift */,
-				090B3D162821C2380048EFAC /* MemoryGame.swift */,
-				090B3D1A2821C3DC0048EFAC /* Theme.swift */,
-				090B3D0F2821C1110048EFAC /* GameDifficulty.swift */,
+				094E7CB22822F89D00973864 /* Model */,
+				094E7CB12822F89800973864 /* Core */,
 				090B3D012821AF0B0048EFAC /* Assets.xcassets */,
 				090B3D032821AF0B0048EFAC /* Preview Content */,
 			);
@@ -77,6 +76,90 @@
 				090B3D042821AF0B0048EFAC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		094E7CB12822F89800973864 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				094E7CB32822F8A900973864 /* GameSettings */,
+				094E7CB62822F8C700973864 /* MemoryGame */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		094E7CB22822F89D00973864 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				094E7CB92822F8FC00973864 /* Enums */,
+				094E7CBA2822F8FF00973864 /* Objects */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		094E7CB32822F8A900973864 /* GameSettings */ = {
+			isa = PBXGroup;
+			children = (
+				094E7CB42822F8B300973864 /* ViewModels */,
+				094E7CB52822F8BC00973864 /* Views */,
+			);
+			path = GameSettings;
+			sourceTree = "<group>";
+		};
+		094E7CB42822F8B300973864 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		094E7CB52822F8BC00973864 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				090B3CFF2821AF0A0048EFAC /* GameSettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		094E7CB62822F8C700973864 /* MemoryGame */ = {
+			isa = PBXGroup;
+			children = (
+				094E7CB82822F8E800973864 /* ViewModels */,
+				094E7CB72822F8E300973864 /* Views */,
+			);
+			path = MemoryGame;
+			sourceTree = "<group>";
+		};
+		094E7CB72822F8E300973864 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				090B3D132821C1850048EFAC /* MemoryGameView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		094E7CB82822F8E800973864 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		094E7CB92822F8FC00973864 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				090B3D1A2821C3DC0048EFAC /* Theme.swift */,
+				090B3D0F2821C1110048EFAC /* GameDifficulty.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		094E7CBA2822F8FF00973864 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				090B3D162821C2380048EFAC /* MemoryGame.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				090B3D002821AF0A0048EFAC /* GameSettingsView.swift in Sources */,
+				099EF4492822D870008CBE96 /* MemoryGameViewModel.swift in Sources */,
 				090B3D102821C1110048EFAC /* GameDifficulty.swift in Sources */,
 				090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */,
 				090B3D142821C1850048EFAC /* MemoryGameView.swift in Sources */,
