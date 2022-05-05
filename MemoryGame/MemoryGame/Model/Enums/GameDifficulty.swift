@@ -35,5 +35,7 @@ enum GameDifficulty: CaseIterable {
         }
     }
     
+    var numberOfPairsOfCards: Int { (numberOfColumns * numberOfRows) / 2}
+    
     static let example = GameDifficulty.medium
 }

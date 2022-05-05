@@ -13,25 +13,53 @@ struct MemoryGame {
     private(set) var difficulty: GameDifficulty
     private(set) var moveCount: Int
     // Remaining pairs = total cards - matched cards
-    var remainingPairsCount: Int { cards.count - cards.filter { $0.isMatched }.count }
+    var remainingPairsCount: Int { (cards.count - cards.filter { $0.isMatched }.count) / 2 }
     
-    init(difficulty: GameDifficulty) {
+    private var indexOfTheOnlySelectedCard: Int? {
+        if cards.filter({ $0.isFaceUp }).count == 1, let index = cards.firstIndex(where: { $0.isFaceUp }) {
+            return index
+        }
+        
+        return nil
+    }
+    
+    init?(difficulty: GameDifficulty, contents: [String]) {
+        let numberOfPairsOfCards = difficulty.numberOfPairsOfCards
+        
+        // Check there are as many contents (such as emojis) as pairs of cards
+        guard contents.count >= numberOfPairsOfCards else { return nil }
+                
         self.cards = []
         self.difficulty = difficulty
         
-        let numberOfPairsOfCards = (difficulty.numberOfRows * difficulty.numberOfColumns) / 2
-        
         for i in 0..<numberOfPairsOfCards {
-            cards.append(Card(id: i * 2, content: "\(i)"))
-            cards.append(Card(id: i * 2 + 1, content: "\(i)"))
+            let content = contents[i]
+            cards.append(Card(id: i * 2, content: content))
+            cards.append(Card(id: i * 2 + 1, content: content))
         }
+        
+        cards.shuffle()
         
         self.moveCount = 0
     }
     
     mutating func select(_ card: Card) {
-        guard let selectedIndex = cards.firstIndex(of: card) else { return }
-        cards[selectedIndex].isFaceUp.toggle()
+        if let selectedIndex = cards.firstIndex(of: card),
+           !cards[selectedIndex].isMatched, !cards[selectedIndex].isFaceUp {
+            
+            if let indexOfTheOnlySelectedCard = indexOfTheOnlySelectedCard {
+                if cards[selectedIndex].content == cards[indexOfTheOnlySelectedCard].content {
+                    cards[selectedIndex].isMatched = true
+                    cards[indexOfTheOnlySelectedCard].isMatched = true
+                }
+            } else {
+                for cardIndex in cards.indices {
+                    cards[cardIndex].isFaceUp = false
+                }
+            }
+            
+            cards[selectedIndex].isFaceUp = true
+        }
     }
     
     struct Card: Equatable {
@@ -48,5 +76,5 @@ struct MemoryGame {
         }
     }
     
-    static let example = MemoryGame(difficulty: GameDifficulty.example)
+    static let example = MemoryGame(difficulty: GameDifficulty.example, contents: Theme.example.contents)
 }

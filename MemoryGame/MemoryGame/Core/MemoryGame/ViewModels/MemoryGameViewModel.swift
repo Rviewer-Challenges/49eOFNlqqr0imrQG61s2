@@ -10,12 +10,17 @@ import Foundation
 
 class MemoryGameViewModel: ObservableObject {
     @Published private var memoryGame: MemoryGame
+    private let theme: Theme
     
     var cards: [MemoryGame.Card] {  memoryGame.cards }
     var remainingPairsCount: Int { memoryGame.remainingPairsCount }
+    var gameDifficulty: GameDifficulty { memoryGame.difficulty }
     
-    init() {
-        memoryGame = MemoryGame(difficulty: .example)
+    var title: String { theme.title }
+    
+    init(memoryGame: MemoryGame, theme: Theme) {
+        self.memoryGame = memoryGame
+        self.theme = theme
     }
     
     func select(_ card: MemoryGame.Card) {

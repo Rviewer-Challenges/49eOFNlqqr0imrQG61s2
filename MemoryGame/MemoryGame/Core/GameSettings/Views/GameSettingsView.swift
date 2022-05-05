@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameSettingsView: View {
     @State private var gameDifficulty: GameDifficulty = .easy
-    @State private var theme: Theme = .pokemon
+    @State private var theme = Self.themes.first!
     @State private var isUserReady = false
     
     var body: some View {
@@ -69,8 +69,8 @@ extension GameSettingsView {
             Spacer()
             
             Picker("Select a theme", selection: $theme) {
-                ForEach(Theme.allCases, id: \.self) {
-                    Text($0.title)
+                ForEach(Self.themes) { theme in
+                    Text(theme.title).tag(theme)
                 }
             }
             .pickerStyle(.menu)
@@ -80,9 +80,28 @@ extension GameSettingsView {
     // MARK: - Start Game Button -
     var startGameButton: some View {
         NavigationLink {
-            MemoryGameView()
+            let game = createGame()
+            MemoryGameView(game: game!, theme: theme)
         } label: {
             Text("Start game!")
         }
     }
+    
+    func createGame() -> MemoryGame? {
+        let contents = theme.contents
+        let game = MemoryGame(difficulty: gameDifficulty, contents: contents)
+        return game
+    }
+}
+
+// This will be an extension of view's viewmodel
+extension GameSettingsView {
+    static let themes = [
+        Theme(title: "Vehicles", color: .blue,
+              contents: ["🚂", "🚀", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚲", "⛵️", "🛸", "🛶", "🛺", "🚌", "🏍", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚈"]),
+        Theme(title: "Animals", color: .blue,
+              contents: ["🐶", "🐱", "🐭", "🐰", "🐹", "🦊", "🐻", "🐼", "🐻‍❄️", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐔", "🦋", "🐌", "🪰", "🐞", "🐙", "🐬", "🐳"]),
+        Theme(title: "Plants", color: .blue,
+              contents: ["🌹", "🌺", "🍀", "💐", "🌸", "🌷", "🌲", "🌻", "☘️", "🌱", "🥀", "🌵", "🍄", "🍁", "🪴", "🌼"]),
+    ]
 }

@@ -9,66 +9,67 @@
 import SwiftUI
 
 struct MemoryGameView: View {
-    @ObservedObject var game: MemoryGameViewModel
-    private let theme: Theme
-    
+    @ObservedObject var gameViewModel: MemoryGameViewModel
     @Environment(\.dismiss) var dismiss
-    @State private var remainingTime = 1
     
-    init() {
-        self._game = ObservedObject(initialValue: MemoryGameViewModel())
-        self.theme = .example
+    init(game: MemoryGame, theme: Theme) {
+        let viewModel = MemoryGameViewModel(memoryGame: game, theme: theme)
+        self._gameViewModel = ObservedObject(initialValue: viewModel)
     }
     
     var body: some View {
         VStack {
-            Text("Remaining pairs: \(game.remainingPairsCount)")
+            Text("Remaining pairs: \(gameViewModel.remainingPairsCount)")
             
             ScrollView {
-                LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
-                    ForEach(game.cards, id: \.id) { card in
-                        ZStack {
-                            let shape = RoundedRectangle(cornerRadius: 10)
-                            
-                            if card.isFaceUp {
-                                shape.fill(.white)
-                                shape.strokeBorder(lineWidth: 3)
-                                    .foregroundColor(.blue)
-                                Text(String(card.content))
-                            } else {
-                                shape.fill(.blue)
-                            }
-                        }
-                        .aspectRatio(2/3, contentMode: .fit)
-                        .onTapGesture {
-                            game.select(card)
-                        }
-                    }
-                }
+                cardGrid
             }
 
             backButton
         }
         .padding()
-        .navigationTitle(theme.title)
-    }
-    
-    func goBackToMenu() {
-        dismiss()
+        .navigationTitle(gameViewModel.title)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 struct MemoryGameView_Previews: PreviewProvider {
     static var previews: some View {
-        MemoryGameView()
+        MemoryGameView(game: .example!, theme: .example)
     }
 }
 
 extension MemoryGameView {
     
+    // MARK: - Card Grid -
+    var cardGrid: some View {
+        LazyVGrid(columns: Array.init(repeating: GridItem(), count: gameViewModel.gameDifficulty.numberOfColumns)) {
+            ForEach(gameViewModel.cards, id: \.id) { card in
+                GeometryReader { geometry in
+                    ZStack {
+                        let shape = RoundedRectangle(cornerRadius: 10)
+                        
+                        if card.isFaceUp || card.isMatched {
+                            shape.fill(.white)
+                            shape.strokeBorder(lineWidth: 3)
+                                .foregroundColor(.blue)
+                            Text(String(card.content))
+                                .font(.system(size: geometry.size.width * 0.7))
+                        } else {
+                            shape.fill(.blue)
+                        }
+                    }
+                    .onTapGesture { gameViewModel.select(card) }
+                }
+                .aspectRatio(2/3, contentMode: .fit)
+            }
+        }
+    }
+    
     // MARK: - Back Button -
     var backButton: some View {
-        Button("Go back", action: goBackToMenu)
+        Button("Go back") { dismiss() }
             .padding()
     }
 }

@@ -14,7 +14,7 @@
 		090B3D102821C1110048EFAC /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D0F2821C1110048EFAC /* GameDifficulty.swift */; };
 		090B3D142821C1850048EFAC /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D132821C1850048EFAC /* MemoryGameView.swift */; };
 		090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D162821C2380048EFAC /* MemoryGame.swift */; };
-		090B3D1B2821C3DC0048EFAC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D1A2821C3DC0048EFAC /* Theme.swift */; };
+		0975E3132824308D00E1CB9D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0975E3122824308D00E1CB9D /* Theme.swift */; };
 		099EF4492822D870008CBE96 /* MemoryGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +27,7 @@
 		090B3D0F2821C1110048EFAC /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
 		090B3D132821C1850048EFAC /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		090B3D162821C2380048EFAC /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
-		090B3D1A2821C3DC0048EFAC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0975E3122824308D00E1CB9D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,7 +148,6 @@
 		094E7CB92822F8FC00973864 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				090B3D1A2821C3DC0048EFAC /* Theme.swift */,
 				090B3D0F2821C1110048EFAC /* GameDifficulty.swift */,
 			);
 			path = Enums;
@@ -158,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				090B3D162821C2380048EFAC /* MemoryGame.swift */,
+				0975E3122824308D00E1CB9D /* Theme.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -234,12 +234,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				090B3D002821AF0A0048EFAC /* GameSettingsView.swift in Sources */,
+				0975E3132824308D00E1CB9D /* Theme.swift in Sources */,
 				099EF4492822D870008CBE96 /* MemoryGameViewModel.swift in Sources */,
 				090B3D102821C1110048EFAC /* GameDifficulty.swift in Sources */,
 				090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */,
 				090B3D142821C1850048EFAC /* MemoryGameView.swift in Sources */,
 				090B3CFE2821AF0A0048EFAC /* MemoryGameApp.swift in Sources */,
-				090B3D1B2821C3DC0048EFAC /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
