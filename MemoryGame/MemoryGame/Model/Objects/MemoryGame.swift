@@ -23,11 +23,8 @@ struct MemoryGame {
         return nil
     }
     
-    init?(difficulty: GameDifficulty, contents: [String]) {
+    init(difficulty: GameDifficulty, contents: [String]) {
         let numberOfPairsOfCards = difficulty.numberOfPairsOfCards
-        
-        // Check there are as many contents (such as emojis) as pairs of cards
-        guard contents.count >= numberOfPairsOfCards else { return nil }
                 
         self.cards = []
         self.difficulty = difficulty
@@ -48,6 +45,8 @@ struct MemoryGame {
            !cards[selectedIndex].isMatched, !cards[selectedIndex].isFaceUp {
             
             if let indexOfTheOnlySelectedCard = indexOfTheOnlySelectedCard {
+                moveCount += 1
+                
                 if cards[selectedIndex].content == cards[indexOfTheOnlySelectedCard].content {
                     cards[selectedIndex].isMatched = true
                     cards[indexOfTheOnlySelectedCard].isMatched = true

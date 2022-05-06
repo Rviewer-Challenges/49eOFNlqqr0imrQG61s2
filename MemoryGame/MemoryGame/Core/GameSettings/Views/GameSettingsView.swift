@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct GameSettingsView: View {
-    @State private var gameDifficulty: GameDifficulty = .easy
-    @State private var theme = Self.themes.first!
-    @State private var isUserReady = false
+    @ObservedObject var settings = GameSettingsViewModel()
     
     var body: some View {
         NavigationView {
@@ -53,7 +51,7 @@ extension GameSettingsView {
     
     // MARK: - Difficulty Picker -
     var difficultySelection: some View {
-        Picker("Game difficulty", selection: $gameDifficulty) {
+        Picker("Game difficulty", selection: $settings.gameDifficulty) {
             ForEach(GameDifficulty.allCases, id: \.self) {
                 Text($0.title)
             }
@@ -68,8 +66,8 @@ extension GameSettingsView {
             
             Spacer()
             
-            Picker("Select a theme", selection: $theme) {
-                ForEach(Self.themes) { theme in
+            Picker("Select a theme", selection: $settings.theme) {
+                ForEach(settings.availableThemes) { theme in
                     Text(theme.title).tag(theme)
                 }
             }
@@ -80,28 +78,10 @@ extension GameSettingsView {
     // MARK: - Start Game Button -
     var startGameButton: some View {
         NavigationLink {
-            let game = createGame()
-            MemoryGameView(game: game!, theme: theme)
+            let game = settings.createGame()
+            MemoryGameView(game: game, theme: settings.theme)
         } label: {
             Text("Start game!")
         }
     }
-    
-    func createGame() -> MemoryGame? {
-        let contents = theme.contents
-        let game = MemoryGame(difficulty: gameDifficulty, contents: contents)
-        return game
-    }
-}
-
-// This will be an extension of view's viewmodel
-extension GameSettingsView {
-    static let themes = [
-        Theme(title: "Vehicles", color: .blue,
-              contents: ["🚂", "🚀", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚲", "⛵️", "🛸", "🛶", "🛺", "🚌", "🏍", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚈"]),
-        Theme(title: "Animals", color: .blue,
-              contents: ["🐶", "🐱", "🐭", "🐰", "🐹", "🦊", "🐻", "🐼", "🐻‍❄️", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐔", "🦋", "🐌", "🪰", "🐞", "🐙", "🐬", "🐳"]),
-        Theme(title: "Plants", color: .blue,
-              contents: ["🌹", "🌺", "🍀", "💐", "🌸", "🌷", "🌲", "🌻", "☘️", "🌱", "🥀", "🌵", "🍄", "🍁", "🪴", "🌼"]),
-    ]
 }

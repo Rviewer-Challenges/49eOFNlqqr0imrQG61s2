@@ -19,13 +19,27 @@ struct MemoryGameView: View {
     
     var body: some View {
         VStack {
-            Text("Remaining pairs: \(gameViewModel.remainingPairsCount)")
+            // Top information
+            HStack {
+                remainingPairsCounter
+                Spacer()
+                timeCounter
+            }
             
+            // Card Grid
             ScrollView {
                 cardGrid
             }
 
-            backButton
+            // Bottom - actions
+            HStack {
+                backButton
+                Spacer()
+                moveCountLabel
+                Spacer()
+                giveUpButton
+            }
+            .padding()
         }
         .padding()
         .navigationTitle(gameViewModel.title)
@@ -36,11 +50,23 @@ struct MemoryGameView: View {
 
 struct MemoryGameView_Previews: PreviewProvider {
     static var previews: some View {
-        MemoryGameView(game: .example!, theme: .example)
+        MemoryGameView(game: .example, theme: .example)
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE 3"))
+        MemoryGameView(game: .example, theme: .example)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
     }
 }
 
 extension MemoryGameView {
+    
+    var remainingPairsCounter: some View {
+        Text("Remaining pairs: \(gameViewModel.remainingPairsCount)")
+    }
+    
+    var timeCounter: some View {
+        TimerView(id: "MemoryGame", minutes: 1, seconds: 0)
+            .equatable()
+    }
     
     // MARK: - Card Grid -
     var cardGrid: some View {
@@ -67,9 +93,16 @@ extension MemoryGameView {
         }
     }
     
-    // MARK: - Back Button -
+    // MARK: - Buttons and move count -
     var backButton: some View {
         Button("Go back") { dismiss() }
-            .padding()
+    }
+    
+    var moveCountLabel: some View {
+        Text("Moves: **\(gameViewModel.moveCount)**")
+    }
+    
+    var giveUpButton: some View {
+        Button("Give up", role: .destructive) { }
     }
 }

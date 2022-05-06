@@ -13,9 +13,11 @@ class MemoryGameViewModel: ObservableObject {
     private let theme: Theme
     
     var cards: [MemoryGame.Card] {  memoryGame.cards }
-    var remainingPairsCount: Int { memoryGame.remainingPairsCount }
-    var gameDifficulty: GameDifficulty { memoryGame.difficulty }
     
+    var remainingPairsCount: Int { memoryGame.remainingPairsCount }
+    var moveCount: Int { memoryGame.moveCount }
+    
+    var gameDifficulty: GameDifficulty { memoryGame.difficulty }
     var title: String { theme.title }
     
     init(memoryGame: MemoryGame, theme: Theme) {

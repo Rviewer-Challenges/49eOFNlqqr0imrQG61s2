@@ -16,6 +16,9 @@
 		090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D162821C2380048EFAC /* MemoryGame.swift */; };
 		0975E3132824308D00E1CB9D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0975E3122824308D00E1CB9D /* Theme.swift */; };
 		099EF4492822D870008CBE96 /* MemoryGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */; };
+		09BEDBA728252F6C001758DE /* GameSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BEDBA628252F6C001758DE /* GameSettingsViewModel.swift */; };
+		09BEDBAA2825390B001758DE /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BEDBA92825390B001758DE /* TimerView.swift */; };
+		09BEDBAC28253915001758DE /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BEDBAB28253915001758DE /* GameTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,9 @@
 		090B3D162821C2380048EFAC /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		0975E3122824308D00E1CB9D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameViewModel.swift; sourceTree = "<group>"; };
+		09BEDBA628252F6C001758DE /* GameSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsViewModel.swift; sourceTree = "<group>"; };
+		09BEDBA92825390B001758DE /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		09BEDBAB28253915001758DE /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 		094E7CB12822F89800973864 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				09BEDBA828253903001758DE /* Components */,
 				094E7CB32822F8A900973864 /* GameSettings */,
 				094E7CB62822F8C700973864 /* MemoryGame */,
 			);
@@ -108,6 +115,7 @@
 		094E7CB42822F8B300973864 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				09BEDBA628252F6C001758DE /* GameSettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -160,6 +168,23 @@
 				0975E3122824308D00E1CB9D /* Theme.swift */,
 			);
 			path = Objects;
+			sourceTree = "<group>";
+		};
+		09BEDBA828253903001758DE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				09BEDBAD2825490D001758DE /* Timer */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		09BEDBAD2825490D001758DE /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				09BEDBAB28253915001758DE /* GameTimer.swift */,
+				09BEDBA92825390B001758DE /* TimerView.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,11 +258,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09BEDBAA2825390B001758DE /* TimerView.swift in Sources */,
 				090B3D002821AF0A0048EFAC /* GameSettingsView.swift in Sources */,
 				0975E3132824308D00E1CB9D /* Theme.swift in Sources */,
+				09BEDBAC28253915001758DE /* GameTimer.swift in Sources */,
 				099EF4492822D870008CBE96 /* MemoryGameViewModel.swift in Sources */,
 				090B3D102821C1110048EFAC /* GameDifficulty.swift in Sources */,
 				090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */,
+				09BEDBA728252F6C001758DE /* GameSettingsViewModel.swift in Sources */,
 				090B3D142821C1850048EFAC /* MemoryGameView.swift in Sources */,
 				090B3CFE2821AF0A0048EFAC /* MemoryGameApp.swift in Sources */,
 			);
