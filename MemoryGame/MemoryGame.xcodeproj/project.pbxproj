@@ -17,7 +17,6 @@
 		0975E3132824308D00E1CB9D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0975E3122824308D00E1CB9D /* Theme.swift */; };
 		099EF4492822D870008CBE96 /* MemoryGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */; };
 		09BEDBA728252F6C001758DE /* GameSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BEDBA628252F6C001758DE /* GameSettingsViewModel.swift */; };
-		09BEDBAA2825390B001758DE /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BEDBA92825390B001758DE /* TimerView.swift */; };
 		09BEDBAC28253915001758DE /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BEDBAB28253915001758DE /* GameTimer.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +32,6 @@
 		0975E3122824308D00E1CB9D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameViewModel.swift; sourceTree = "<group>"; };
 		09BEDBA628252F6C001758DE /* GameSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsViewModel.swift; sourceTree = "<group>"; };
-		09BEDBA92825390B001758DE /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		09BEDBAB28253915001758DE /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				09BEDBAB28253915001758DE /* GameTimer.swift */,
-				09BEDBA92825390B001758DE /* TimerView.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -258,7 +255,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09BEDBAA2825390B001758DE /* TimerView.swift in Sources */,
 				090B3D002821AF0A0048EFAC /* GameSettingsView.swift in Sources */,
 				0975E3132824308D00E1CB9D /* Theme.swift in Sources */,
 				09BEDBAC28253915001758DE /* GameTimer.swift in Sources */,

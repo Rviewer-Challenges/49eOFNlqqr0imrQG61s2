@@ -61,6 +61,12 @@ struct MemoryGame {
         }
     }
     
+    mutating func revealAllCards() {
+        for cardIndex in cards.indices {
+            cards[cardIndex].isMatched = true
+        }
+    }
+    
     struct Card: Equatable {
         static func ==(lhs: Card, rhs: Card) -> Bool { lhs.id == rhs.id }
         

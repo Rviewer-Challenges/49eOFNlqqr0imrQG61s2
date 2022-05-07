@@ -28,4 +28,8 @@ class MemoryGameViewModel: ObservableObject {
     func select(_ card: MemoryGame.Card) {
         memoryGame.select(card)
     }
+    
+    func revealAllCards() {
+        memoryGame.revealAllCards()
+    }
 }

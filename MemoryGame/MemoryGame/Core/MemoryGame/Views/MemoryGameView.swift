@@ -10,11 +10,16 @@ import SwiftUI
 
 struct MemoryGameView: View {
     @ObservedObject var gameViewModel: MemoryGameViewModel
+    @ObservedObject var timer: GameTimer
     @Environment(\.dismiss) var dismiss
     
     init(game: MemoryGame, theme: Theme) {
-        let viewModel = MemoryGameViewModel(memoryGame: game, theme: theme)
-        self._gameViewModel = ObservedObject(initialValue: viewModel)
+        let gameVModel = MemoryGameViewModel(memoryGame: game, theme: theme)
+        self._gameViewModel = ObservedObject(initialValue: gameVModel)
+        
+        let endTimeHander = gameVModel.revealAllCards
+        let timerViewModel = GameTimer(minutes: 0, seconds: 10, endTimeHandler: endTimeHander)
+        self._timer = ObservedObject(initialValue: timerViewModel)
     }
     
     var body: some View {
@@ -45,6 +50,9 @@ struct MemoryGameView: View {
         .navigationTitle(gameViewModel.title)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            timer.start()
+        }
     }
 }
 
@@ -59,13 +67,15 @@ struct MemoryGameView_Previews: PreviewProvider {
 
 extension MemoryGameView {
     
+    // MARK: - Top Screen Information -
     var remainingPairsCounter: some View {
         Text("Remaining pairs: \(gameViewModel.remainingPairsCount)")
     }
     
     var timeCounter: some View {
-        TimerView(id: "MemoryGame", minutes: 1, seconds: 0)
-            .equatable()
+        Text("\(timer.minutes) : \(String(format: "%02d", timer.seconds))")
+            .foregroundColor(timer.timeIsCritical(underMinutes: 0, seconds: 10) ? .red : .green)
+            .bold()
     }
     
     // MARK: - Card Grid -
