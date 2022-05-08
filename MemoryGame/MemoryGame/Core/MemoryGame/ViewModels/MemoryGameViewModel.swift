@@ -6,7 +6,7 @@
 //  Copyright © 2022 Francisco Javier Gallego Lahera. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 class MemoryGameViewModel: ObservableObject {
     @Published private var memoryGame: MemoryGame
@@ -14,8 +14,8 @@ class MemoryGameViewModel: ObservableObject {
     
     var cards: [MemoryGame.Card] {  memoryGame.cards }
     
-    var remainingPairsCount: Int { memoryGame.remainingPairsCount }
     var moveCount: Int { memoryGame.moveCount }
+    var remainingPairsCount: Int { memoryGame.remainingPairsCount }
     
     var gameDifficulty: GameDifficulty { memoryGame.difficulty }
     var title: String { theme.title }
@@ -29,8 +29,11 @@ class MemoryGameViewModel: ObservableObject {
         memoryGame.select(card)
     }
     
+    func endTimeHandler() {
+        revealAllCards()
+    }
     func revealAllCards() {
-        memoryGame.revealAllCards()
+        withAnimation { memoryGame.revealAllCards() }
     }
     
     func restart() {

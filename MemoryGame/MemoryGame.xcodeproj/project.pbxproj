@@ -15,6 +15,7 @@
 		090B3D142821C1850048EFAC /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D132821C1850048EFAC /* MemoryGameView.swift */; };
 		090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B3D162821C2380048EFAC /* MemoryGame.swift */; };
 		090DA5212827F6C500441D9A /* CardShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5202827F6C500441D9A /* CardShape.swift */; };
+		090DA5262828279800441D9A /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5252828279800441D9A /* TimerView.swift */; };
 		0975E3132824308D00E1CB9D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0975E3122824308D00E1CB9D /* Theme.swift */; };
 		099EF4492822D870008CBE96 /* MemoryGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */; };
 		09BEDBA728252F6C001758DE /* GameSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BEDBA628252F6C001758DE /* GameSettingsViewModel.swift */; };
@@ -31,6 +32,7 @@
 		090B3D132821C1850048EFAC /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		090B3D162821C2380048EFAC /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		090DA5202827F6C500441D9A /* CardShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardShape.swift; sourceTree = "<group>"; };
+		090DA5252828279800441D9A /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		0975E3122824308D00E1CB9D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		099EF4482822D870008CBE96 /* MemoryGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameViewModel.swift; sourceTree = "<group>"; };
 		09BEDBA628252F6C001758DE /* GameSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsViewModel.swift; sourceTree = "<group>"; };
@@ -99,6 +101,22 @@
 				090DA5202827F6C500441D9A /* CardShape.swift */,
 			);
 			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		090DA527282827A500441D9A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				09BEDBAB28253915001758DE /* GameTimer.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		090DA528282827AF00441D9A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				090DA5252828279800441D9A /* TimerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		094E7CB12822F89800973864 /* Core */ = {
@@ -198,7 +216,8 @@
 		09BEDBAD2825490D001758DE /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				09BEDBAB28253915001758DE /* GameTimer.swift */,
+				090DA527282827A500441D9A /* ViewModels */,
+				090DA528282827AF00441D9A /* Views */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -280,6 +299,7 @@
 				09BEDBAC28253915001758DE /* GameTimer.swift in Sources */,
 				099EF4492822D870008CBE96 /* MemoryGameViewModel.swift in Sources */,
 				090B3D102821C1110048EFAC /* GameDifficulty.swift in Sources */,
+				090DA5262828279800441D9A /* TimerView.swift in Sources */,
 				090B3D172821C2380048EFAC /* MemoryGame.swift in Sources */,
 				09BEDBA728252F6C001758DE /* GameSettingsViewModel.swift in Sources */,
 				090B3D142821C1850048EFAC /* MemoryGameView.swift in Sources */,

@@ -30,15 +30,15 @@ class GameTimer: ObservableObject {
                 if self.isPaused == false {
                     if self.seconds > 0 {
                         self.seconds -= 1
+                        
+                        if self.seconds == 0 && self.minutes == 0 {
+                            self.endTimeHandler()
+                            timer.invalidate()
+                        }
                     } else if self.minutes > 0 {
                         self.seconds = 59
                         self.minutes -= 1
-                    } else {
-                        timer.invalidate()
-                        self.endTimeHandler()
                     }
-                    
-                    print("DEBUG: \(self.minutes) : \(self.seconds)")
                 }
             }
         }

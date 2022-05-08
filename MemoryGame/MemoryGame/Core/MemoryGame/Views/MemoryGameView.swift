@@ -15,38 +15,29 @@ struct MemoryGameView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.scenePhase) var scenePhase
     
+    var gameIsOver: Bool { gameViewModel.remainingPairsCount == 0 || timer.timeIsUp }
+    
     init(game: MemoryGame, theme: Theme) {
         let gameVModel = MemoryGameViewModel(memoryGame: game, theme: theme)
         self._gameViewModel = ObservedObject(initialValue: gameVModel)
         
-        let endTimeHander = gameVModel.revealAllCards
-        let timerViewModel = GameTimer(minutes: 1, seconds: 0, endTimeHandler: endTimeHander)
+        let endTimeHandler = gameVModel.endTimeHandler
+        let timerViewModel = GameTimer(minutes: 1, seconds: 0, endTimeHandler: endTimeHandler)
         self._timer = ObservedObject(initialValue: timerViewModel)
     }
     
     var body: some View {
         VStack {
-            // Top information
+            // Card Grid
+            ScrollView { cardGrid }
+            
+            // Game info
             HStack {
                 remainingPairsCounter
                 Spacer()
-                timeCounter
+                moveCounter
             }
-            
-            // Card Grid
-            ScrollView {
-                cardGrid
-            }
-
-            // Bottom - actions
-            HStack {
-                backButton
-                Spacer()
-                moveCountLabel
-                Spacer()
-                giveUpButton
-            }
-            .padding()
+            .padding([.horizontal, .top], 4)
         }
         .padding()
         .navigationTitle(gameViewModel.title)
@@ -61,29 +52,32 @@ struct MemoryGameView: View {
                 timer.pauseOrResume()
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) { backButton }
+            ToolbarItem(placement: .navigationBarTrailing) { timeCounter }
+        }
     }
 }
 
 struct MemoryGameView_Previews: PreviewProvider {
     static var previews: some View {
-        MemoryGameView(game: .example, theme: .example)
-            .previewDevice(PreviewDevice(rawValue: "iPhone SE 3"))
-        MemoryGameView(game: .example, theme: .example)
-            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
+        NavigationView {
+            MemoryGameView(game: .example, theme: .example)
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE 3"))
+        }
+        
+        NavigationView {
+            MemoryGameView(game: .example, theme: .example)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
+        }
     }
 }
 
 extension MemoryGameView {
     
-    // MARK: - Top Screen Information -
-    var remainingPairsCounter: some View {
-        Text("Remaining pairs: \(gameViewModel.remainingPairsCount)")
-    }
-    
+    // MARK: - Time Counter -
     var timeCounter: some View {
-        Text("\(timer.minutes) : \(String(format: "%02d", timer.seconds))")
-            .foregroundColor(timer.timeIsCritical(underMinutes: 0, seconds: 10) ? .red : .green)
-            .bold()
+        TimerView(minutes: timer.minutes, seconds: timer.seconds, timeIsCritical: timer.timeIsCritical(underMinutes: 0, seconds: 10))
     }
     
     // MARK: - Card Grid -
@@ -105,16 +99,21 @@ extension MemoryGameView {
         }
     }
     
-    // MARK: - Buttons and move count -
+    // MARK: - Back / Give Up Button -
     var backButton: some View {
-        Button("Go back") { dismiss() }
+        Button { dismiss() } label: {
+            Text(gameIsOver ? "Back" : "Give up")
+                .foregroundColor(gameIsOver ? .blue : .red)
+                .bold()
+        }
     }
     
-    var moveCountLabel: some View {
+    // MARK: - Bottom Screen Game Information -
+    var remainingPairsCounter: some View {
+        Text("Remaining pairs: \(gameViewModel.remainingPairsCount)")
+    }
+    
+    var moveCounter: some View {
         Text("Moves: **\(gameViewModel.moveCount)**")
-    }
-    
-    var giveUpButton: some View {
-        Button("Give up", role: .destructive) { }
     }
 }
