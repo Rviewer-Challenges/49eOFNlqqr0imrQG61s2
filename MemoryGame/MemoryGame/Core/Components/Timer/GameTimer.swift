@@ -11,6 +11,7 @@ import Foundation
 class GameTimer: ObservableObject {
     @Published private(set) var minutes: Int
     @Published private(set) var seconds: Int
+    @Published private(set) var isPaused = false
     var timeIsUp: Bool { minutes == 0 && seconds == 0 }
     private(set) var timer: Timer?
     var endTimeHandler: () -> Void
@@ -25,25 +26,35 @@ class GameTimer: ObservableObject {
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 guard let self = self else { return }
-                if self.seconds > 0 {
-                    self.seconds -= 1
-                } else if self.minutes > 0 {
-                    self.seconds = 59
-                    self.minutes -= 1
-                } else {
-                    timer.invalidate()
-                    self.endTimeHandler()
-                }
                 
-                print("DEBUG: \(self.minutes) : \(self.seconds)")
+                if self.isPaused == false {
+                    if self.seconds > 0 {
+                        self.seconds -= 1
+                    } else if self.minutes > 0 {
+                        self.seconds = 59
+                        self.minutes -= 1
+                    } else {
+                        timer.invalidate()
+                        self.endTimeHandler()
+                    }
+                    
+                    print("DEBUG: \(self.minutes) : \(self.seconds)")
+                }
             }
         }
     }
     
+    func pauseOrResume() {
+        isPaused.toggle()
+    }
+    
     func reset(toMinutes minutes: Int, seconds: Int) {
         timer?.invalidate()
+        timer = nil
+        
         self.minutes = minutes
         self.seconds = seconds
+        start()
     }
     
     func timeIsCritical(underMinutes minutes: Int, seconds: Int) -> Bool {

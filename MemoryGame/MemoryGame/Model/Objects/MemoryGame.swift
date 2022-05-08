@@ -67,6 +67,17 @@ struct MemoryGame {
         }
     }
     
+    mutating func restart() {
+        cards.shuffle()
+        
+        for cardIndex in cards.indices {
+            cards[cardIndex].isMatched = false
+            cards[cardIndex].isFaceUp = false
+        }
+        
+        moveCount = 0
+    }
+    
     struct Card: Equatable {
         static func ==(lhs: Card, rhs: Card) -> Bool { lhs.id == rhs.id }
         

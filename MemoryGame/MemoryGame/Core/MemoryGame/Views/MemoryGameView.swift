@@ -11,14 +11,16 @@ import SwiftUI
 struct MemoryGameView: View {
     @ObservedObject var gameViewModel: MemoryGameViewModel
     @ObservedObject var timer: GameTimer
+    
     @Environment(\.dismiss) var dismiss
+    @Environment(\.scenePhase) var scenePhase
     
     init(game: MemoryGame, theme: Theme) {
         let gameVModel = MemoryGameViewModel(memoryGame: game, theme: theme)
         self._gameViewModel = ObservedObject(initialValue: gameVModel)
         
         let endTimeHander = gameVModel.revealAllCards
-        let timerViewModel = GameTimer(minutes: 0, seconds: 10, endTimeHandler: endTimeHander)
+        let timerViewModel = GameTimer(minutes: 1, seconds: 0, endTimeHandler: endTimeHander)
         self._timer = ObservedObject(initialValue: timerViewModel)
     }
     
@@ -51,7 +53,13 @@ struct MemoryGameView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            timer.start()
+            gameViewModel.restart()
+            timer.reset(toMinutes: 1, seconds: 0)
+        }
+        .onChange(of: scenePhase) { newScene in
+            if newScene == .active || newScene == .background {
+                timer.pauseOrResume()
+            }
         }
     }
 }
@@ -83,20 +91,14 @@ extension MemoryGameView {
         LazyVGrid(columns: Array.init(repeating: GridItem(), count: gameViewModel.gameDifficulty.numberOfColumns)) {
             ForEach(gameViewModel.cards, id: \.id) { card in
                 GeometryReader { geometry in
-                    ZStack {
-                        let shape = RoundedRectangle(cornerRadius: 10)
-                        
-                        if card.isFaceUp || card.isMatched {
-                            shape.fill(.white)
-                            shape.strokeBorder(lineWidth: 3)
-                                .foregroundColor(.blue)
-                            Text(String(card.content))
-                                .font(.system(size: geometry.size.width * 0.7))
-                        } else {
-                            shape.fill(.blue)
+                    Text(String(card.content))
+                        .font(.system(size: geometry.size.width * 0.7))
+                        .cardShape(isFaceUp: card.isFaceUp || card.isMatched)
+                    .onTapGesture {
+                        withAnimation {
+                            gameViewModel.select(card)
                         }
                     }
-                    .onTapGesture { gameViewModel.select(card) }
                 }
                 .aspectRatio(2/3, contentMode: .fit)
             }

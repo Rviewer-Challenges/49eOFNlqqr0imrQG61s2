@@ -32,4 +32,8 @@ class MemoryGameViewModel: ObservableObject {
     func revealAllCards() {
         memoryGame.revealAllCards()
     }
+    
+    func restart() {
+        memoryGame.restart()
+    }
 }
