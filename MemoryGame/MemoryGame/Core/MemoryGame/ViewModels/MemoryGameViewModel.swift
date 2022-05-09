@@ -20,6 +20,12 @@ class MemoryGameViewModel: ObservableObject {
     var gameDifficulty: GameDifficulty { memoryGame.difficulty }
     var title: String { theme.title }
     
+    // Alert
+    @Published var alertTitle = ""
+    @Published var alertMessage = ""
+    @Published var alertOKAction = { }
+    @Published var showingAlert = false
+    
     init(memoryGame: MemoryGame, theme: Theme) {
         self.memoryGame = memoryGame
         self.theme = theme
@@ -38,5 +44,12 @@ class MemoryGameViewModel: ObservableObject {
     
     func restart() {
         memoryGame.restart()
+    }
+    
+    func giveUp(withConsequence consequence: @escaping () -> Void) {
+        alertTitle = "Give up"
+        alertMessage = "Do you really want to give up?"
+        alertOKAction = consequence
+        showingAlert = true
     }
 }

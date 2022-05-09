@@ -29,7 +29,7 @@ struct MemoryGameView: View {
     var body: some View {
         VStack {
             // Card Grid
-            ScrollView { cardGrid }
+            ScrollView { cardGrid.padding(.top) }
             
             // Game info
             HStack {
@@ -55,6 +55,12 @@ struct MemoryGameView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) { backButton }
             ToolbarItem(placement: .navigationBarTrailing) { timeCounter }
+        }
+        .alert(gameViewModel.alertTitle, isPresented: $gameViewModel.showingAlert) {
+            Button("Cancel", role: .cancel) { timer.pauseOrResume() }
+            Button("Continue", role: .destructive, action: gameViewModel.alertOKAction)
+        } message: {
+            Text(gameViewModel.alertMessage)
         }
     }
 }
@@ -101,7 +107,16 @@ extension MemoryGameView {
     
     // MARK: - Back / Give Up Button -
     var backButton: some View {
-        Button { dismiss() } label: {
+        Button {
+            if gameIsOver {
+                dismiss()
+            } else {
+                timer.pauseOrResume()
+                gameViewModel.giveUp {
+                    dismiss()
+                }
+            }
+        } label: {
             Text(gameIsOver ? "Back" : "Give up")
                 .foregroundColor(gameIsOver ? .blue : .red)
                 .bold()

@@ -51,6 +51,7 @@ class GameTimer: ObservableObject {
     func reset(toMinutes minutes: Int, seconds: Int) {
         timer?.invalidate()
         timer = nil
+        isPaused = false
         
         self.minutes = minutes
         self.seconds = seconds
