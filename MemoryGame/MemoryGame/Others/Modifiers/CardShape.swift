@@ -9,9 +9,8 @@
 import SwiftUI
 
 struct CardShape: ViewModifier, AnimatableModifier {
-    init(isFaceUp: Bool) {
-        rotationAngle = isFaceUp ? 0 : 180
-    }
+    
+    var color: Gradient
     
     var rotationAngle: Double
     
@@ -21,18 +20,24 @@ struct CardShape: ViewModifier, AnimatableModifier {
         set { rotationAngle = newValue }
     }
     
+    init(isFaceUp: Bool, color: Gradient) {
+        self.rotationAngle = isFaceUp ? 0 : 180
+        self.color = color
+    }
+    
     func body(content: Content) -> some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 10)
+            let linearGradient = LinearGradient(gradient: color, startPoint: .top, endPoint: .bottom)
             
             if rotationAngle < 90 {
                 shape.fill(.white)
                 shape.strokeBorder(lineWidth: 3)
-                    .foregroundColor(.blue)
+                    .foregroundStyle(linearGradient)
                 
                 content
             } else {
-                shape.fill(.blue)
+                shape.fill(linearGradient)
                     .opacity(rotationAngle < 90 ? 0 : 1)
             }
         }
@@ -42,7 +47,7 @@ struct CardShape: ViewModifier, AnimatableModifier {
 
 extension View {
     
-    func cardShape(isFaceUp: Bool) -> some View {
-        modifier(CardShape(isFaceUp: isFaceUp))
+    func cardShape(isFaceUp: Bool, color: Gradient) -> some View {
+        modifier(CardShape(isFaceUp: isFaceUp, color: color))
     }
 }

@@ -27,40 +27,45 @@ struct MemoryGameView: View {
     }
     
     var body: some View {
-        VStack {
-            // Card Grid
-            ScrollView { cardGrid.padding(.top) }
+        ZStack {
+            Color(Constants.kBackgroundColor)
+                .ignoresSafeArea()
             
-            // Game info
-            HStack {
-                remainingPairsCounter
-                Spacer()
-                moveCounter
+            VStack {
+                // Card Grid
+                ScrollView { cardGrid.padding(.top) }
+                
+                // Game info
+                HStack {
+                    remainingPairsCounter
+                    Spacer()
+                    moveCounter
+                }
+                .padding([.horizontal, .top], 4)
             }
-            .padding([.horizontal, .top], 4)
-        }
-        .padding()
-        .navigationTitle(gameViewModel.title)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .onAppear {
-            gameViewModel.restart()
-            timer.reset(toMinutes: 1, seconds: 0)
-        }
-        .onChange(of: scenePhase) { newScene in
-            if newScene == .active || newScene == .background {
-                timer.pauseOrResume()
+            .padding()
+            .navigationTitle(gameViewModel.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .onAppear {
+                gameViewModel.restart()
+                timer.reset(toMinutes: 1, seconds: 0)
             }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) { backButton }
-            ToolbarItem(placement: .navigationBarTrailing) { timeCounter }
-        }
-        .alert(gameViewModel.alertTitle, isPresented: $gameViewModel.showingAlert) {
-            Button("Cancel", role: .cancel) { timer.pauseOrResume() }
-            Button("Continue", role: .destructive, action: gameViewModel.alertOKAction)
-        } message: {
-            Text(gameViewModel.alertMessage)
+            .onChange(of: scenePhase) { newScene in
+                if newScene == .active || newScene == .background {
+                    timer.pauseOrResume()
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) { backButton }
+                ToolbarItem(placement: .navigationBarTrailing) { timeCounter }
+            }
+            .alert(gameViewModel.alertTitle, isPresented: $gameViewModel.showingAlert) {
+                Button("Cancel", role: .cancel) { timer.pauseOrResume() }
+                Button("Continue", role: .destructive, action: gameViewModel.alertOKAction)
+            } message: {
+                Text(gameViewModel.alertMessage)
+            }
         }
     }
 }
@@ -93,7 +98,7 @@ extension MemoryGameView {
                 GeometryReader { geometry in
                     Text(String(card.content))
                         .font(.system(size: geometry.size.width * 0.7))
-                        .cardShape(isFaceUp: card.isFaceUp || card.isMatched)
+                        .cardShape(isFaceUp: card.isFaceUp || card.isMatched, color: gameViewModel.cardColor)
                     .onTapGesture {
                         withAnimation {
                             gameViewModel.select(card)

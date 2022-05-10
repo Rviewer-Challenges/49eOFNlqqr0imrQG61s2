@@ -19,6 +19,9 @@ class MemoryGameViewModel: ObservableObject {
     
     var gameDifficulty: GameDifficulty { memoryGame.difficulty }
     var title: String { theme.title }
+    var cardColor: Gradient {
+        getColor(for: theme.color)
+    }
     
     // Alert
     @Published var alertTitle = ""
@@ -46,10 +49,25 @@ class MemoryGameViewModel: ObservableObject {
         memoryGame.restart()
     }
     
+    // Alert
+    
     func giveUp(withConsequence consequence: @escaping () -> Void) {
         alertTitle = "Give up"
         alertMessage = "Do you really want to give up?"
         alertOKAction = consequence
         showingAlert = true
+    }
+    
+    // Helper methods
+    func getColor(for theme: Theme.ThemeColor) -> Gradient {
+        switch theme {
+        case .purple: return Gradient(colors: [.purple])
+        case .red: return Gradient(colors: [.red])
+        case .orange: return Gradient(colors: [.orange])
+        case .yellow: return Gradient(colors: [.yellow])
+        case .green: return Gradient(colors: [.green])
+        case .blue: return Gradient(colors: [.blue])
+        case .gradient: return Gradient(colors: [Color(Constants.kMainColor), .pink])
+        }
     }
 }

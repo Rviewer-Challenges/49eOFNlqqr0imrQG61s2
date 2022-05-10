@@ -12,25 +12,36 @@ struct GameSettingsView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                // Difficulty Section
-                Section {
-                    difficultySelection
-                } header: {
-                    Text("Difficulty")
-                }
+            ZStack {
+                Color(Constants.kBackgroundColor)
+                    .ignoresSafeArea()
                 
-                // Theme Section
-                Section {
-                    themeSelection
-                } header: {
-                    Text("Theme")
-                }
-                
-                // Start Game Section
-                Section {
+                VStack {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 20) {
+                            // Difficulty Section
+                            Section { difficultySelection }
+                            header: {
+                                Text("DIFFICULTY")
+                                    .bold()
+                            }
+                            
+                            Spacer(minLength: 10)
+                            
+                            // Theme Section
+                            Section { themeSelection }
+                            header: {
+                                Text("THEME")
+                                    .bold()
+                            }
+                        }
+                    }
+                    .padding(.vertical, 20)
+                    
                     startGameButton
+                        .padding()
                 }
+                .padding(.horizontal)
             }
             .navigationTitle("Game Settings")
         }
@@ -41,6 +52,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         GameSettingsView()
             .previewDevice(PreviewDevice(rawValue: "iPhone SE 3"))
+            .preferredColorScheme(.dark)
         
         GameSettingsView()
             .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
@@ -51,27 +63,31 @@ extension GameSettingsView {
     
     // MARK: - Difficulty Picker -
     var difficultySelection: some View {
-        Picker("Game difficulty", selection: $settings.gameDifficulty) {
-            ForEach(GameDifficulty.allCases, id: \.self) {
-                Text($0.title)
+        LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], spacing: 20) {
+            ForEach(GameDifficulty.allCases, id: \.self) { difficulty in
+                SelectionButton(
+                    icon: difficulty.icon,
+                    title: difficulty.title,
+                    isSelected: difficulty == settings.selectedDifficulty) {
+                        settings.select(difficulty)
+                    }
+                .padding(.horizontal, 5)
             }
         }
-        .pickerStyle(.segmented)
     }
     
     // MARK: - Theme Picker -
     var themeSelection: some View {
-        HStack {
-            Text("Select a theme")
-            
-            Spacer()
-            
-            Picker("Select a theme", selection: $settings.theme) {
-                ForEach(settings.availableThemes) { theme in
-                    Text(theme.title).tag(theme)
-                }
+        LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], spacing: 20) {
+            ForEach(settings.availableThemes, id: \.self) { theme in
+                SelectionButton(
+                    icon: theme.contents.first!,
+                    title: theme.title,
+                    isSelected: theme == settings.selectedTheme) {
+                        settings.select(theme)
+                    }
+                .padding(.horizontal, 5)
             }
-            .pickerStyle(.menu)
         }
     }
     
@@ -79,9 +95,16 @@ extension GameSettingsView {
     var startGameButton: some View {
         NavigationLink {
             let game = settings.createGame()
-            MemoryGameView(game: game, theme: settings.theme)
+            MemoryGameView(game: game, theme: settings.selectedTheme)
         } label: {
-            Text("Start game!")
+            ZStack {
+                Color(Constants.kMainColor)
+                Text("Start game!")
+                    .foregroundColor(.white)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .frame(height: 50)
+            .shadow(color: .black, radius: 4, x: 5, y: 3)
         }
     }
 }

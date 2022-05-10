@@ -9,25 +9,37 @@
 import Foundation
 
 class GameSettingsViewModel: ObservableObject {
-    @Published var gameDifficulty: GameDifficulty = .easy
-    @Published var theme = themes.first!
+    @Published var selectedDifficulty: GameDifficulty = .easy
+    @Published var selectedTheme = themes.first!
     @Published var isUserReady = false
     
     // A theme is available when it has as many cards (or more) as the difficulty requires.
     var availableThemes: [Theme] {
-        Self.themes.filter { $0.contents.count >= gameDifficulty.numberOfPairsOfCards }
+        Self.themes.filter { $0.contents.count >= selectedDifficulty.numberOfPairsOfCards }
     }
     
     func createGame() -> MemoryGame {
-        let contents = theme.contents
-        let game = MemoryGame(difficulty: gameDifficulty, contents: contents)
+        let contents = selectedTheme.contents
+        let game = MemoryGame(difficulty: selectedDifficulty, contents: contents)
         return game
+    }
+    
+    func select(_ theme: Theme) {
+        self.selectedTheme = theme
+    }
+    
+    func randomThemeIcon(_ theme: Theme) -> String {
+        theme.contents.randomElement()!
+    }
+    
+    func select(_ difficulty: GameDifficulty) {
+        self.selectedDifficulty = difficulty
     }
 }
 
 extension GameSettingsViewModel {
     static let themes = [
-        Theme(title: "Vehicles", color: .blue,
+        Theme(title: "Vehicles", color: .gradient,
               contents: ["🚂", "🚀", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚲", "⛵️", "🛸", "🛶", "🛺", "🚌", "🏍", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚈"]),
         Theme(title: "Animals", color: .blue,
               contents: ["🐶", "🐱", "🐭", "🐰", "🐹", "🦊", "🐻", "🐼", "🐻‍❄️", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐔", "🦋", "🐌", "🪰", "🐞", "🐙", "🐬", "🐳"]),

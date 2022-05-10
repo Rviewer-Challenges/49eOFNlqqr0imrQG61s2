@@ -21,7 +21,7 @@ struct Theme: Identifiable, Hashable {
     }
     
     enum ThemeColor {
-        case purple, red, orange, yellow, green, blue
+        case purple, red, orange, yellow, green, blue, gradient
     }
     
     static let example = Theme(title: "Vehicles", color: .blue,

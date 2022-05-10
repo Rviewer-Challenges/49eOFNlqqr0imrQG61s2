@@ -19,6 +19,14 @@ enum GameDifficulty: CaseIterable {
         }
     }
     
+    var icon: String {
+        switch self {
+        case .easy: return "🥉"
+        case .medium: return "🥈"
+        case .hard: return "🥇"
+        }
+    }
+    
     var numberOfRows: Int {
         switch self {
         case .easy: return 4
