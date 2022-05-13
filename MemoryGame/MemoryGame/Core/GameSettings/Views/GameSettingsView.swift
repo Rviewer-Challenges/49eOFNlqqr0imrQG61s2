@@ -97,14 +97,8 @@ extension GameSettingsView {
             let game = settings.createGame()
             MemoryGameView(game: game, theme: settings.selectedTheme)
         } label: {
-            ZStack {
-                Color(Constants.kMainColor)
-                Text("Start game!")
-                    .foregroundColor(.white)
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 14))
-            .frame(height: 50)
-            .shadow(color: .black, radius: 4, x: 5, y: 3)
+            MainButtonLabel(title: "Start game!")
+                .frame(height: 50)
         }
     }
 }

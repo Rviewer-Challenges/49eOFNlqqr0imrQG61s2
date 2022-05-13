@@ -24,6 +24,6 @@ struct Theme: Identifiable, Hashable {
         case purple, red, orange, yellow, green, blue, gradient
     }
     
-    static let example = Theme(title: "Vehicles", color: .blue,
+    static let example = Theme(title: "Vehicles", color: .gradient,
                                contents: ["🚂", "🚀", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚲", "⛵️", "🛸", "🛶", "🛺", "🚌", "🏍", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚈"])
 }

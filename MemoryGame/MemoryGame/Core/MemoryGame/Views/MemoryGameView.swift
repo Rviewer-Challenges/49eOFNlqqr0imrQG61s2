@@ -122,9 +122,8 @@ extension MemoryGameView {
                 }
             }
         } label: {
-            Text(gameIsOver ? "Back" : "Give up")
-                .foregroundColor(gameIsOver ? .blue : .red)
-                .bold()
+            MainButtonLabel(title: gameIsOver ? "Back" : "Give up")
+                .frame(height: 30)
         }
     }
     

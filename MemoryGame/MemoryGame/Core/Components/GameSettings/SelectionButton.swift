@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SelectionButton: View {
     @State private var isBeingPressed = false
+    @State private var yOffset: CGFloat = 0.0
+    
     let icon: String
     let title: String
     let isSelected: Bool
@@ -30,9 +32,11 @@ struct SelectionButton: View {
         .clipShape(RoundedRectangle(cornerRadius: 14))
         .shadow(color: isBeingPressed ? .clear : isSelected ? Color(Constants.kMainColor) : .black, radius: 4, x: 3, y: 5)
         .aspectRatio(1, contentMode: .fit)
+        .offset(x: 0, y: yOffset)
         .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressed in
             action()
             isBeingPressed = pressed
+            yOffset = pressed ? 4 : 0
         }, perform: { })
     }
 }
