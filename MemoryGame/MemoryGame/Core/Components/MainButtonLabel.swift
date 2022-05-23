@@ -20,7 +20,6 @@ struct MainButtonLabel: View {
                 .foregroundColor(.white)
         }
         .clipShape(RoundedRectangle(cornerRadius: 14))
-        .shadow(color: .black, radius: 4, x: 5, y: 3)
     }
 }
 
